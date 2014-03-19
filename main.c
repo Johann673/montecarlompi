@@ -8,6 +8,9 @@ int find_index(int a[], int num_elements, int value);
 int main(int argc, char *argv[]) {
 	int numProc;    // Numero d'idenfification du processus.
 	int nbProcs;    // Nombre total de processus.
+
+	clock_t begin, end;
+	double time_spent;
 	  
 	int range = 36;
 	int repetition;
@@ -20,6 +23,8 @@ int main(int argc, char *argv[]) {
 
 	// Récupère les arguments
 	repetition = atoi(argv[1]); 
+
+	begin = clock();
 
 	// Initialise le tableau de résultat
 	int resultat[7] = {0};
@@ -46,6 +51,11 @@ int main(int argc, char *argv[]) {
     for(int i = 0; i < 7; i++) {
         printf("%d -> %d \n", i, resultat[i]);
     }
+
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+	printf("Temps: %G \n", time_spent);
 
 	MPI_Finalize();
 }

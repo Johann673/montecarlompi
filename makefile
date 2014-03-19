@@ -19,6 +19,6 @@ clean:
 		$(RM) *.out
 
 run: classes
-	${RUN} -np 1 a.out 100000
+	${RUN} -np 1 a.out 10000000
 
 		
