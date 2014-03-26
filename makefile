@@ -18,7 +18,7 @@ classes: $(CLASSES:.c=.out)
 clean: 
 		$(RM) *.out
 
-run: classes
+run: classes 
 	${RUN} -np 1 a.out 10000000
 
 		
