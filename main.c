@@ -47,7 +47,7 @@ int main(int argc, char *argv[]) {
 			resultat[nbGagnants]++;
 		}
 	
-
+ 
     for(int i = 0; i < 7; i++) {
         printf("%d -> %d \n", i, resultat[i]);
     }
