@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
 	MPI_Gather( mon_resultat, 7, MPI_INT, resultat[numProc], 7, MPI_INT, 0, MPI_COMM_WORLD );
 
 	tempsEcoule += MPI_Wtime();
-
+ 
 	MPI_Finalize();
 	if ( numProc == 0 ) {
 		int resultatFinal[7] = {0};

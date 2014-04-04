@@ -21,4 +21,4 @@ clean:
 run: classes 
 	${RUN} -np 2 a.out 10000000
 
-		
+		 
