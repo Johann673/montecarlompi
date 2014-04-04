@@ -63,9 +63,8 @@ int main(int argc, char *argv[]) {
 			}
 		}
 		
-		
 		for(int i = 0; i < 7; i++) {
-			printf("%d -> %d \n", i, resultatFinal[i]);
+			printf("%d -> %.3f%% \n", i, (100*((float)resultatFinal[i])/repetition));
 		}
 
 		printf( "Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule );
