@@ -12,7 +12,7 @@ RUN = mpirun
 NP = 4
 EXEC = loto-statique
 
-EXECS = loto-dynmaique loto-seq loto-statique
+EXECS = loto-dynamique loto-seq loto-statique
 
 default: $(EXEC)
 
