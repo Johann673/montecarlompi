@@ -1,24 +1,36 @@
-FLAGS = -std=c99
-GCC = mpicc
+
+MAKE = make
+RM = rm -f
+CFLAGS = -std=c99
+CC = mpicc
 RUN = mpirun
-.SUFFIXES: .c .out
-.c.out:l
-		$(GCC) $(FLAGS) $*.c
+
+.c.o:
+	$(CC) -c $(CFLAGS) $<
+
 		
-CLASSES = \
-		main.c
-		
+NP = 4
+EXEC = loto
 
-default: classes
+EXECS = loto loto-seq loto-statique
 
-compile: classes
+default: $(EXEC)
 
-classes: $(CLASSES:.c=.out)
+compile: $(EXEC)
 
-clean: 
-		$(RM) *.out
+tests: $(EXEC)
+	${RUN} -np $(NP) $(EXEC) 10000000
 
-run: classes 
-	${RUN} -np 2 a.out 10000000
+
+# CLEAN
+
+TMPFILES = $(EXECS)\
+           TAGS \
+           *~ *.o \
+
+clean:
+	@$(RM) $(TMPFILES)
+
+
 
 		 
