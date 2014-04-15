@@ -17,7 +17,6 @@ int main(int argc, char *argv[]) {
 	  
 	int repetition;
 	int combinaison[6] = {1,2,3,4,5,6};
-	//MPI_Status statut;
 	
 	MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &numProc );
@@ -26,50 +25,32 @@ int main(int argc, char *argv[]) {
 	// Récupère les arguments
 	repetition = atoi(argv[1]); 
 
-	// Le processus maitre alloue la mémoire pour le résultat
-	int resultat[nbProcs][7];
-	if ( numProc == 0 ) {
-		memset(resultat, 0, sizeof resultat);
-	}
-
 	// On démarre la minuterie
 	MPI_Barrier( MPI_COMM_WORLD );
 	double tempsEcoule = -MPI_Wtime();
 
+
 	// Résultat locaux
-	int *mon_resultat;
-	mon_resultat = (int *) malloc( 7 * sizeof(int) );
-
-	MPI_Scatter( mon_resultat, 7, MPI_INT, mon_resultat, 7, MPI_INT, 0, MPI_COMM_WORLD );
-	// Initialise les données à 0 pour chaque thread
-	for(int i = 0; i < 7; i++) {
-		mon_resultat[i] = 0;
-	}
+	int mon_resultat[7] = {0};
 	int nbElements = nbElementsParTache(numProc+1, repetition, nbProcs);
-
 	// Effectue le tirage
 	tirage(combinaison, mon_resultat, nbElements, numProc);
 
-	MPI_Gather( mon_resultat, 7, MPI_INT, resultat[numProc], 7, MPI_INT, 0, MPI_COMM_WORLD );
+	// Regroupe les résultats dans le résultat final
+	int resultatFinal[7] = {0};
+	MPI_Reduce(mon_resultat, resultatFinal, 7, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
 	tempsEcoule += MPI_Wtime();
  
 	MPI_Finalize();
+
 	if ( numProc == 0 ) {
-		int resultatFinal[7] = {0};
-		for(int k = 0; k < nbProcs; k++) {
-			for(int i = 0; i < 7; i++) {
-				resultatFinal[i] += resultat[k][i];
-			}
-		}
-		
 		for(int i = 0; i < 7; i++) {
 			printf("%d -> %.3f%% \n", i, (100*((float)resultatFinal[i])/repetition));
 		}
-
 		printf( "Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule );
 	}
-	return( 0 );
+	return(0);
 }
 
 void tirage(int combinaison[], int resultat[], int nbElements, int numProc) {
