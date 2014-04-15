@@ -21,7 +21,7 @@ compile:
 	$(CC) common.c loto-dynamique.c loto-seq.c loto-statique.c lotoMPI.c -o lotoMPI $(CFLAGS)
 
 tests: compile
-	${RUN} -np $(NP) $(MAIN) 10000000 1
+	${RUN} -np $(NlP) $(MAIN) 10000000 1
 
 mesures: compile
 	${RUN} -np $(NP) $(MAIN) 10000000

@@ -6,9 +6,7 @@
 #include <string.h>
 #include "header.h" 
 
-void mesures() {
 
-}
 
 void test(int repetition, int numProc) {
 	double tempsEcoule = 0;
@@ -43,6 +41,7 @@ int main(int argc, char *argv[]) {
 		}
 	} else {
 
+		// Mesures :
 		tempsEcoule = play_seq(repetition, 0); 
 		if(numProc == 0) {
 			printf( "Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule );
