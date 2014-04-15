@@ -14,7 +14,6 @@ MAIN = lotoMPI
 #Paramètres d'exécution
 I = 10000000
 NP = 4
-EXEC = sequentiel
 
 #sequentiel statique dynamique
 default: compile
