@@ -1,7 +1,7 @@
 
 MAKE = make
 RM = rm -f
-CFLAGS = -std=c99
+CFLAGS = -std=c99 -lm
 CC = mpicc
 RUN = mpirun
 
