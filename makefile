@@ -1,3 +1,4 @@
+#Options de compilation
 
 MAKE = make
 RM = rm -f
@@ -8,17 +9,14 @@ RUN = mpirun
 .c.o:
 	$(CC) -c $(CFLAGS) $<
 
-		
 MAIN = lotoMPI
 
 #Paramètres d'exécution
-
 I = 10000000
 NP = 4
 EXEC = sequentiel
 
 #sequentiel statique dynamique
-
 default: compile
 
 compile: 
@@ -30,16 +28,11 @@ tests: compile
 mesures: compile
 	${RUN} -np $(NP) $(MAIN) $(I)
 
-
 # CLEAN
-
 TMPFILES = $(MAIN)\
            TAGS \
            *~ *.o \
 
 clean:
 	@$(RM) $(TMPFILES)
-
-
-
 		 
