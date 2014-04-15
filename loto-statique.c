@@ -4,26 +4,16 @@
 #include <time.h>
 #include <math.h>
 #include <string.h>
+#include "header.h"
 
-int nbElementsParTache(int position, int nbTachesTotales, int nbThreads);
-int find_index(int a[], int num_elements, int value);
-void tirage(int combinaison[], int resultat[], int nbElements, int numProc);
-
-
-
-int main(int argc, char *argv[]) {
+double play_statique(int repetition, int affiche) {
 	int numProc;    // Numero d'idenfification du processus.
 	int nbProcs;    // Nombre total de processus.
 	  
-	int repetition;
 	int combinaison[6] = {1,2,3,4,5,6};
 	
-	MPI_Init( &argc, &argv );
 	MPI_Comm_rank( MPI_COMM_WORLD, &numProc );
 	MPI_Comm_size( MPI_COMM_WORLD, &nbProcs );
-
-	// Récupère les arguments
-	repetition = atoi(argv[1]); 
 
 	// On démarre la minuterie
 	MPI_Barrier( MPI_COMM_WORLD );
@@ -42,36 +32,16 @@ int main(int argc, char *argv[]) {
 
 	tempsEcoule += MPI_Wtime();
  
-	MPI_Finalize();
 
 	if ( numProc == 0 ) {
-		for(int i = 0; i < 7; i++) {
-			printf("%d -> %.3f%% \n", i, (100*((float)resultatFinal[i])/repetition));
-		}
-		printf( "Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule );
-	}
-	return(0);
-}
-
-void tirage(int combinaison[], int resultat[], int nbElements, int numProc) {
-	// numéro aléatoire en fonction du numéro du thread
-	srand(time(NULL) ^ numProc);
-	for (int i = 0; i < nbElements; i++) {
-		int nbGagnants = 0;
-		int tirageTmp[6] = {};
-		for(int j = 0; j < 6; j++) {
-			int number = 0;
-			do {
-				number = rand() % 36;
-			} while(find_index(tirageTmp, 6, number) > -1);
-			// Vérifie si bon numéro dans le tirage
-			if(find_index(combinaison, 6, number) > -1) {
-				nbGagnants++;
+		if(affiche) {
+			for(int i = 0; i < 7; i++) {
+				printf("%d -> %.3f%% \n", i, (100*((float)resultatFinal[i])/repetition));
 			}
 		}
-		//Tirage terminé, enregistre les résultats
-		resultat[nbGagnants]++;
+		return tempsEcoule;
 	}
+	return 0;
 }
 
 int nbElementsParTache(int position, int nbTachesTotales, int nbThreads) {
@@ -82,12 +52,3 @@ int nbElementsParTache(int position, int nbTachesTotales, int nbThreads) {
 	return nbParThread;
 }
 
-int find_index(int a[], int num_elements, int value) {
-	int i;
-	for (i=0; i<num_elements; i++) {
-		if (a[i] == value) {
-			return(value);
-		}
-	}
-	return(-1);
-}
