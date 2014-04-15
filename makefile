@@ -12,17 +12,16 @@ RUN = mpirun
 MAIN = lotoMPI
 
 NP = 4
-EXEC = loto-statique
+EXEC = sequentiel
+#sequentiel statique dynamique
 
-EXECS = loto-dynamique loto-seq loto-statique
-
-default: $(EXEC)
+default: compile
 
 compile: 
 	$(CC) common.c loto-dynamique.c loto-seq.c loto-statique.c lotoMPI.c -o lotoMPI $(CFLAGS)
 
-tests: $(EXEC)
-	${RUN} -np $(NP) $(EXEC) 10000000
+tests: compile
+	${RUN} -np $(NP) $(MAIN) 10000000 1
 
 mesures: compile
 	${RUN} -np $(NP) $(MAIN) 10000000
@@ -30,7 +29,7 @@ mesures: compile
 
 # CLEAN
 
-TMPFILES = $(EXECS)\
+TMPFILES = $(MAIN)\
            TAGS \
            *~ *.o \
 
