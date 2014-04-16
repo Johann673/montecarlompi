@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.1.12)  16 APR 2014 13:44
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2014.1.12)  16 APR 2014 16:48
 entering extended mode
 **rapport.tex
 
@@ -768,22 +768,40 @@ Underfull \hbox (badness 10000) in paragraph at lines 131--132
  []
 
 
+Overfull \hbox (30.09308pt too wide) in paragraph at lines 136--143
+[][] 
+ []
+
+<tests/exec1.png, id=322, 455.45157pt x 210.7875pt>
+File: tests/exec1.png Graphic file (type png)
+ <use tests/exec1.png>
+Package pdftex.def Info: tests/exec1.png used on input line 146.
+(pdftex.def)             Requested size: 426.79134pt x 197.52596pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 146--147
+ [] 
+ []
+
+
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
  Make it at least 15.71667pt.
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
 [5]
+Overfull \hbox (30.09308pt too wide) in paragraph at lines 156--162
+[][] 
+ []
 
-Package Fancyhdr Warning: \headheight is too small (12.0pt): 
- Make it at least 14.49998pt.
- We now make it that large for the rest of the document.
- This may cause the page layout to be inconsistent, however.
+<tests/acc1.png, id=332, 456.20438pt x 194.22563pt>
+File: tests/acc1.png Graphic file (type png)
+ <use tests/acc1.png>
+Package pdftex.def Info: tests/acc1.png used on input line 165.
+(pdftex.def)             Requested size: 426.79134pt x 181.70671pt.
 
-[6]
-("E:\Google Drive\EXIA\UQAM\Cours\INF7235 - Programmation parallèle\Devoirs\De
-voir2\MPI\rapport\rapport.bbl")
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 149.
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 165--166
+ [] 
+ []
 
 
 Package Fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -791,25 +809,126 @@ Package Fancyhdr Warning: \headheight is too small (12.0pt):
  We now make it that large for the rest of the document.
  This may cause the page layout to be inconsistent, however.
 
-[7]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 149.
+[6 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs/
+Devoir2/MPI/rapport/tests/exec1.png>]
+<tests/exec2.png, id=341, 455.45157pt x 189.70876pt>
+File: tests/exec2.png Graphic file (type png)
+ <use tests/exec2.png>
+Package pdftex.def Info: tests/exec2.png used on input line 186.
+(pdftex.def)             Requested size: 426.79134pt x 177.77335pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 186--187
+ [] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[7 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs/
+Devoir2/MPI/rapport/tests/acc1.png>]
+<tests/acc2.png, id=350, 455.45157pt x 258.21469pt>
+File: tests/acc2.png Graphic file (type png)
+ <use tests/acc2.png>
+Package pdftex.def Info: tests/acc2.png used on input line 205.
+(pdftex.def)             Requested size: 426.79134pt x 241.96928pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 205--206
+ [] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[8 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs/
+Devoir2/MPI/rapport/tests/exec2.png>]
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[9 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs/
+Devoir2/MPI/rapport/tests/acc2.png>]
+Overfull \hbox (30.09308pt too wide) in paragraph at lines 220--228
+[][] 
+ []
+
+<tests/exec3.png, id=363, 455.45157pt x 271.76532pt>
+File: tests/exec3.png Graphic file (type png)
+ <use tests/exec3.png>
+Package pdftex.def Info: tests/exec3.png used on input line 231.
+(pdftex.def)             Requested size: 426.79134pt x 254.66739pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 231--232
+ [] 
+ []
+
+
+Overfull \hbox (34.59308pt too wide) in paragraph at lines 242--249
+[][] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[10 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs
+/Devoir2/MPI/rapport/tests/exec3.png>]
+<tests/acc3.png, id=374, 455.45157pt x 231.11343pt>
+File: tests/acc3.png Graphic file (type png)
+ <use tests/acc3.png>
+Package pdftex.def Info: tests/acc3.png used on input line 252.
+(pdftex.def)             Requested size: 426.79134pt x 216.57309pt.
+
+Overfull \hbox (8.53766pt too wide) in paragraph at lines 252--253
+ [] 
+ []
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 14.49998pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[11 <E:/Google Drive/EXIA/UQAM/Cours/INF7235 - Programmation parallèle/Devoirs
+/Devoir2/MPI/rapport/tests/acc3.png>]
+("E:\Google Drive\EXIA\UQAM\Cours\INF7235 - Programmation parallèle\Devoirs\De
+voir2\MPI\rapport\rapport.bbl")
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 268.
+
+
+Package Fancyhdr Warning: \headheight is too small (12.0pt): 
+ Make it at least 15.71667pt.
+ We now make it that large for the rest of the document.
+ This may cause the page layout to be inconsistent, however.
+
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 268.
 
 ("E:\Google Drive\EXIA\UQAM\Cours\INF7235 - Programmation parallèle\Devoirs\De
 voir2\MPI\rapport\rapport.aux")
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 149.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 149.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 268.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 268.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: 57E4337086992F1B1A561581CFE356FD;1155.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 149.
+(rerunfilecheck)             Checksum: C0822CCA98284D8B2DA34FA6B5C4A6EE;1157.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 268.
  ) 
 Here is how much of TeX's memory you used:
- 9006 strings out of 493921
- 130147 string characters out of 3147279
- 232560 words of memory out of 3000000
- 12165 multiletter control sequences out of 15000+200000
+ 9073 strings out of 493921
+ 131016 string characters out of 3147279
+ 233456 words of memory out of 3000000
+ 12207 multiletter control sequences out of 15000+200000
  10567 words of font info for 37 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 38i,18n,43p,674b,510s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 38i,18n,43p,689b,510s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{cite.wiki\\penalty\040\\@M\040\040:montecarlo} ha
 s been referenced but does not exist, replaced by a fixed one
 
@@ -819,9 +938,9 @@ es/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb><C:/Program Files/MiKTeX
  2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program Files/MiKTeX 2.9/font
 s/type1/public/amsfonts/cm/cmti12.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/
 public/amsfonts/cm/cmtt12.pfb>
-Output written on rapport.pdf (9 pages, 176330 bytes).
+Output written on rapport.pdf (14 pages, 243407 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 28 named destinations out of 1000 (max. 500000)
- 149 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 422 PDF objects out of 1000 (max. 8388607)
+ 45 named destinations out of 1000 (max. 500000)
+ 179 words of extra memory for PDF output out of 10000 (max. 10000000)
 

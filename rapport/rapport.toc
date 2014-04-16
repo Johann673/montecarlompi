@@ -3,7 +3,7 @@
 \select@language {french}
 \contentsline {section}{\numberline {I}Description du probl\IeC {\`e}me}{2}{section.1}
 \contentsline {section}{\numberline {II}Approches utilis\IeC {\'e}es}{2}{section.2}
-\contentsline {subsection}{\numberline {II.1}Impl\IeC {\'e}mentation de Monte Carlo}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {II.1}Impl\IeC {\'e}mentation de Monte-Carlo}{2}{subsection.2.1}
 \contentsline {subsection}{\numberline {II.2}G\IeC {\'e}n\IeC {\'e}ration de nombres al\IeC {\'e}atoires}{3}{subsection.2.2}
 \contentsline {subsection}{\numberline {II.3}Versions parall\IeC {\`e}les}{3}{subsection.2.3}
 \contentsline {subsubsection}{\numberline {II.3.1}Statique}{3}{subsubsection.2.3.1}
@@ -13,7 +13,7 @@
 \contentsline {subsection}{\numberline {III.2}Conditions des tests}{5}{subsection.3.2}
 \contentsline {subsection}{\numberline {III.3}R\IeC {\'e}sultats}{5}{subsection.3.3}
 \contentsline {subsubsection}{\numberline {III.3.1}Variation du nombre d'it\IeC {\'e}rations}{5}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {III.3.2}Variation du nombre de threads}{6}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {III.3.3}Variation du nombre de t\IeC {\^a}ches}{6}{subsubsection.3.3.3}
-\contentsline {subsection}{\numberline {III.4}Analyse}{6}{subsection.3.4}
-\contentsline {section}{\numberline {IV}Ouvertures}{6}{section.4}
+\contentsline {subsubsection}{\numberline {III.3.2}Variation du nombre de processus}{7}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {III.3.3}Variation du nombre de t\IeC {\^a}ches}{9}{subsubsection.3.3.3}
+\contentsline {subsection}{\numberline {III.4}Analyse}{11}{subsection.3.4}
+\contentsline {section}{\numberline {IV}Ouvertures}{11}{section.4}

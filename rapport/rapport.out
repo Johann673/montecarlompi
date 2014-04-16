@@ -1,6 +1,6 @@
 \BOOKMARK [1][-]{section.1}{Description du probl\350me}{}% 1
 \BOOKMARK [1][-]{section.2}{Approches utilis\351es}{}% 2
-\BOOKMARK [2][-]{subsection.2.1}{Impl\351mentation de Monte Carlo}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.1}{Impl\351mentation de Monte-Carlo}{section.2}% 3
 \BOOKMARK [2][-]{subsection.2.2}{G\351n\351ration de nombres al\351atoires}{section.2}% 4
 \BOOKMARK [2][-]{subsection.2.3}{Versions parall\350les}{section.2}% 5
 \BOOKMARK [3][-]{subsubsection.2.3.1}{Statique}{subsection.2.3}% 6
@@ -10,7 +10,7 @@
 \BOOKMARK [2][-]{subsection.3.2}{Conditions des tests}{section.3}% 10
 \BOOKMARK [2][-]{subsection.3.3}{R\351sultats}{section.3}% 11
 \BOOKMARK [3][-]{subsubsection.3.3.1}{Variation du nombre d'it\351rations}{subsection.3.3}% 12
-\BOOKMARK [3][-]{subsubsection.3.3.2}{Variation du nombre de threads}{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Variation du nombre de processus}{subsection.3.3}% 13
 \BOOKMARK [3][-]{subsubsection.3.3.3}{Variation du nombre de t\342ches}{subsection.3.3}% 14
 \BOOKMARK [2][-]{subsection.3.4}{Analyse}{section.3}% 15
 \BOOKMARK [1][-]{section.4}{Ouvertures}{}% 16
