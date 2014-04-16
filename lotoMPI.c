@@ -6,16 +6,9 @@
 #include <string.h>
 #include "header.h" 
 
-<<<<<<< HEAD
-
-=======
-// Fonction effectuant les mesures de temps d'exécution
-void mesures() {
-}
->>>>>>> 95ae1de0373fa460ba2a78f3f06c1e043ba6d2bd
 
 // Fonction effectuant les tests
-void test(int repetition, int numProc) {
+void test(int repetition, int nbParTache, int numProc) {
 	double tempsEcoule = 0;
 	tempsEcoule = play_seq(repetition, 1); 
 	if(numProc == 0) {
@@ -25,7 +18,7 @@ void test(int repetition, int numProc) {
 	if(numProc == 0) {
 		printf("Statique = %6.1f ms\n", 1000.0 * tempsEcoule);
 	}
-	tempsEcoule = play_dynamique(repetition, 1); 
+	tempsEcoule = play_dynamique(repetition, nbParTache, 1); 
 	if(numProc == 0) {
 		printf("Dynamique = %6.1f ms\n", 1000.0 * tempsEcoule);
 	}
@@ -38,17 +31,14 @@ int main(int argc, char *argv[]) {
 	double tempsEcoule = 0;
 	MPI_Comm_rank(MPI_COMM_WORLD, &numProc);
 	int repetition = atoi(argv[1]);
-	if(argc > 2) {
-    	int type = atoi(argv[2]);
+	int nbParTache = atoi(argv[2]);
+	if(argc > 3) {
+    	int type = atoi(argv[3]);
 		if(type) {
-			test(repetition, numProc);
+			test(repetition, nbParTache, numProc);
 		}
 	} else {
-<<<<<<< HEAD
-
 		// Mesures :
-=======
->>>>>>> 95ae1de0373fa460ba2a78f3f06c1e043ba6d2bd
 		tempsEcoule = play_seq(repetition, 0); 
 		if(numProc == 0) {
 			printf("Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule);
@@ -57,7 +47,7 @@ int main(int argc, char *argv[]) {
 		if(numProc == 0) {
 			printf("Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule);
 		}
-		tempsEcoule = play_dynamique(repetition, 0); 
+		tempsEcoule = play_dynamique(repetition, nbParTache, 0); 
 		if(numProc == 0) {
 			printf("Temps requis = %6.1f ms\n", 1000.0 * tempsEcoule);
 		}

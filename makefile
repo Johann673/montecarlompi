@@ -13,6 +13,7 @@ MAIN = lotoMPI
 
 #Paramètres d'exécution
 I = 10000000
+NBPARTACHE = 1000
 NP = 4
 
 #sequentiel statique dynamique
@@ -22,10 +23,10 @@ compile:
 	$(CC) common.c loto-dynamique.c loto-seq.c loto-statique.c lotoMPI.c -o lotoMPI $(CFLAGS)
 
 tests: compile
-	${RUN} -np $(NP) $(MAIN) $(I) 1
+	${RUN} -np $(NP) $(MAIN) $(I) $(NBPARTACHE) 1
 
 mesures: compile
-	${RUN} -np $(NP) $(MAIN) $(I)
+	${RUN} -np $(NP) $(MAIN) $(I) $(NBPARTACHE)
 
 # CLEAN
 TMPFILES = $(MAIN)\

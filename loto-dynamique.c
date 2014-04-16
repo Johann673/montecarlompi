@@ -13,11 +13,10 @@
 #define MSG_RESULTAT		4
 
 // Version parallèle dynamique
-double play_dynamique(int repetition, int affiche) {
+double play_dynamique(int repetition, int nbParTache, int affiche) {
 	int numProc;    // Numero d'idenfification du processus
 	int nbProcs;    // Nombre total de processus
 	MPI_Comm comm_travailleurs;	  
-	int nbParTache = 1000;
 	int combinaison[6] = {1,2,3,4,5,6};
 	MPI_Comm_rank(MPI_COMM_WORLD, &numProc);
 	MPI_Comm_size(MPI_COMM_WORLD, &nbProcs);

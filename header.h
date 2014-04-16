@@ -1,7 +1,7 @@
 // Versions de l'implémentation
 double play_seq(int repetition, int affiche);
 double play_statique(int repetition, int affiche);
-double play_dynamique(int repetition, int affiche);
+double play_dynamique(int repetition, int nbParTache, int affiche);
 
 // Fonction auxililaires
 int nbElementsParTache(int position, int nbTachesTotales, int nbThreads);
