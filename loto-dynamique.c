@@ -22,6 +22,15 @@ double play_dynamique(int repetition, int nbParTache, int affiche) {
 	MPI_Comm_size(MPI_COMM_WORLD, &nbProcs);
 	double tempsEcoule = -MPI_Wtime();
 
+	// Vérifie qu'on à bien plus de 1 processeur
+	if (nbProcs < 2) {
+		if (numProc == 0) {
+			printf("Dynamique: " );
+			printf("L'execution doit se faire avec au moins deux processus\n");
+			return 0;
+		}
+	}
+
 	if ( numProc == 0 ) {
 		// Coordonnateur
 		MPI_Comm_split(MPI_COMM_WORLD, MPI_UNDEFINED, numProc, &comm_travailleurs);
@@ -45,7 +54,14 @@ double play_dynamique(int repetition, int nbParTache, int affiche) {
 // Définition du coordonnateur
 void coordonnateur(int* resultatFinal, int repetition, int nbParTache, int nbTravailleurs) {
 	int nbTravailleursActifs = nbTravailleurs;   // Le nombre de travailleurs qui n'ont pas encore termine
-	int nbTaches = repetition / nbParTache;
+	int nbTaches = 0;
+	if(nbParTache <= repetition) {
+		nbTaches = repetition / nbParTache;
+	} else {
+		nbTaches = 1;
+		nbParTache = repetition;
+	}
+
  	int nbTachesEnvoyes = 0;                     // Le nombre de taches qui ont deja ete envoyes
 
 	while (nbTravailleursActifs > 0) {
