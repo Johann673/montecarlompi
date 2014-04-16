@@ -6,6 +6,7 @@
 #include <string.h>
 #include "header.h" 
 
+// Définition de l'opération de tirage
 void tirage(int combinaison[], int resultat[], int nbElements, int numProc) {
 	// numéro aléatoire
 	srand(time(NULL) ^ numProc);
@@ -27,6 +28,7 @@ void tirage(int combinaison[], int resultat[], int nbElements, int numProc) {
 	}
 }
 
+// Fonction de recherche de l'index
 int find_index(int a[], int num_elements, int value) {
 	int i;
 	for (i=0; i<num_elements; i++) {

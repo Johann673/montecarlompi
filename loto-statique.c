@@ -6,32 +6,29 @@
 #include <string.h>
 #include "header.h"
 
+// Version parallèle répartition statique
 double play_statique(int repetition, int affiche) {
-	int numProc;    // Numero d'idenfification du processus.
-	int nbProcs;    // Nombre total de processus.
-	  
+	int numProc;    // Numero d'idenfification du processus
+	int nbProcs;    // Nombre total de processus
 	int combinaison[6] = {1,2,3,4,5,6};
-	
-	MPI_Comm_rank( MPI_COMM_WORLD, &numProc );
-	MPI_Comm_size( MPI_COMM_WORLD, &nbProcs );
+	MPI_Comm_rank(MPI_COMM_WORLD, &numProc);
+	MPI_Comm_size(MPI_COMM_WORLD, &nbProcs);
 
 	// On démarre la minuterie
-	MPI_Barrier( MPI_COMM_WORLD );
+	MPI_Barrier(MPI_COMM_WORLD);
 	double tempsEcoule = -MPI_Wtime();
-
 
 	// Résultat locaux
 	int mon_resultat[7] = {0};
 	int nbElements = nbElementsParTache(numProc+1, repetition, nbProcs);
+
 	// Effectue le tirage
 	tirage(combinaison, mon_resultat, nbElements, numProc);
 
 	// Regroupe les résultats dans le résultat final
 	int resultatFinal[7] = {0};
 	MPI_Reduce(mon_resultat, resultatFinal, 7, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
-
 	tempsEcoule += MPI_Wtime();
- 
 
 	if ( numProc == 0 ) {
 		if(affiche) {
@@ -44,6 +41,7 @@ double play_statique(int repetition, int affiche) {
 	return 0;
 }
 
+// Calcul d'élements répartis par tâche
 int nbElementsParTache(int position, int nbTachesTotales, int nbThreads) {
 	int nbParThread = (int)floor(ceil(nbTachesTotales / nbThreads));
 	if((position * nbParThread) > nbTachesTotales) {
@@ -51,4 +49,3 @@ int nbElementsParTache(int position, int nbTachesTotales, int nbThreads) {
 	}
 	return nbParThread;
 }
-
