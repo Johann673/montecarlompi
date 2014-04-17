@@ -16,4 +16,3 @@
 \contentsline {subsubsection}{\numberline {III.3.2}Variation du nombre de processus}{7}{subsubsection.3.3.2}
 \contentsline {subsubsection}{\numberline {III.3.3}Variation du nombre de t\IeC {\^a}ches}{9}{subsubsection.3.3.3}
 \contentsline {subsection}{\numberline {III.4}Analyse}{11}{subsection.3.4}
-\contentsline {section}{\numberline {IV}Ouvertures}{11}{section.4}

@@ -82,8 +82,8 @@ Clément \textsc{De Figueiredo}
 
 "\textit{Le terme méthode de Monte-Carlo, ou méthode Monte-Carlo, désigne toute méthode visant à calculer une valeur numérique en utilisant des procédés aléatoires, c'est-à-dire des techniques probabilistes.}" \cite{wiki:montecarlo}
 \\
-Dans le programme élaboré dans le cadre d'un travail de session pour le cours de programmation parallèle haute performance, la méthode de Monte Carlo est appliquée aux jeux de hasard.
-Plus précisément, c'est le jeu du Loto qui a été choisi afin d'y appliquer la méthode de Monte Carlo. En effet, l'objectif est de savoir quelles sont les probabilités qu'un nombre apparaisse plus qu'un autre. Dans ce but, plusieurs techniques de parallélisme ont été mise en place et leurs performances ont été mesurées afin de connaître quelle était la meilleure approche dans le contexte de la méthode de Monte-Carlo appliquée au jeu du Loto. 
+Dans le programme élaboré dans le cadre d'un travail de session pour le cours de programmation parallèle haute performance, la méthode de Monte-Carlo est appliquée aux jeux de hasard.
+Plus précisément, c'est le jeu du Loto qui a été choisi afin d'y appliquer la méthode de Monte-Carlo. En effet, l'objectif est de savoir quelles sont les probabilités qu'un nombre apparaisse plus qu'un autre. Dans ce but, plusieurs techniques de parallélisme ont été mise en place et leurs performances ont été mesurées afin de connaître quelle était la meilleure approche dans le contexte de la méthode de Monte-Carlo appliquée au jeu du Loto. 
 
 
 \section{Approches utilisées}
@@ -212,7 +212,7 @@ La mesure d'accélération montre bien que la version statique est plus efficace
 %qd ntache => repetition : c'est une version séquentiel car 1 seul proc travail
 Dans la version parallèle dynamique de notre implémentation de la méthode de Monte-Carlo, on divise le nombre de tâches en plusieurs groupes pour que chaque thread réalise une tâche après l'autre jusqu'à la fin de la queue. Chaque thread récupère une tâche lorsque sa tâche précédente est terminée, dans le cas contraire il attend une opération de communication afin de transmettre ces résultats au thread maître. \\
 Nous allons donc tester différentes valeurs allant de dix tâches à cent millions de tâches afin d'observer les effets de la variation d'un petit ou grand nombre de tâche sur les différentes versions du programme.\\
-Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et statique car le nombre de tâche est fixe au contraire de la version dynamique. On peut donc voir que pour des valeurs inférieures à un million de tâches par processus la version statique est plus rapide que la version dynamique pour atteindre un temps d'exécution constant de deux millisecondes à partir d'un million de tâches (Tab. \ref{tab:tempsexec3} et Fig. \ref{fig:tempsexec3}). 
+Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et statique car le nombre de tâche est fixe au contraire de la version dynamique. On peut donc voir que la version dynamique est plus performante que la version séquentielle entre 100 et 100 000 tâches, mais une fois que le découpage de tâche est égale ou supérieur au nombre d'itérations, un seul thread travail car il n'y a qu'une grosse tâche, ce qui rend cette version identique à une version séquentielle (Tab. \ref{tab:tempsexec3} et Fig. \ref{fig:tempsexec3}). 
 
 \begin{table}[H]
 \caption{Résultat de la variation du nombre de tâches}
@@ -222,7 +222,7 @@ Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et 
             & \textbf{10} & \textbf{100} & \textbf{1000} & \textbf{10000} & \textbf{100000} & \textbf{1000000} & \textbf{10000000} & \textbf{100000000} \\ \hline
 \textbf{S}  & 0,080        & 0,080        & 0,079       	 & 0,079         & 0,079          & 0,079           & 0,079            & 0,079             \\ \hline
 \textbf{PS} & 0,021       & 0,021        & 0,021         & 0,021          & 0,022           & 0,021            & 0,023             & 0,025              \\ \hline
-\textbf{PD} & 0,571       & 0,057        & 0,031         & 0,034          & 0,083           & 0,002            & 0,002             & 0,002              \\ \hline
+\textbf{PD} & 0,571       & 0,057        & 0,031         & 0,034          & 0,082           & 0,082 & 0,082 & 0,082              \\ \hline
 
 \end{tabular}
 \end{table}
@@ -233,7 +233,7 @@ Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et 
 \label{fig:tempsexec3}
 \end{figure}
 
-Afin de mieux observer les résultats, voici le calcul de l'accélération des deux méthodes parallèles. On voit clairement que la version dynamique est bien plus performante passé un million de tâche allant jusqu'à une accélération de trente-quatre fois supérieur à la version séquentielle (Tab. \ref{tab:acc3} et Fig. \ref{fig:acc3}). 
+Afin de mieux observer les résultats, voici le calcul de l'accélération des deux méthodes parallèles. On aperçoit bien que la version dynamique est performante quand le découpage des tâches est inférieur au nombre de répétitions, bien que si les tâches sont trop petites l'accélération est en dessous de 1 ce qui signifie qu'elle n'est pas optimisée (Tab. \ref{tab:acc3} et Fig. \ref{fig:acc3}). 
 
 
 \begin{table}[H]
@@ -243,7 +243,7 @@ Afin de mieux observer les résultats, voici le calcul de l'accélération des d
 \hline
             & \textbf{10} & \textbf{100} & \textbf{1 000} & \textbf{10000} & \textbf{100000} & \textbf{1000000} & \textbf{10000000} & \textbf{100000000} \\ \hline
 \textbf{PS} & 3,903       & 3,813        & 3,845          & 3,726          & 3,563           & 3,766            & 3,433             & 3,169              \\ \hline
-\textbf{PD} & 0,141       & 1,389        & 2,555          & 2,324          & 0,959           & 34,217           & 34,478            & 37,571             \\ \hline
+\textbf{PD} & 0,141       & 1,389        & 2,555          & 2,324          & 0,971           & 0,956 			& 0,964             & 0,961            	 \\ \hline
 
 \end{tabular}
 \end{table}
@@ -255,9 +255,16 @@ Afin de mieux observer les résultats, voici le calcul de l'accélération des d
 \end{figure}
 
 \subsection{Analyse}
+Pour l'analyse des résultats, nous nous sommes basés sur les valeurs de obtenus lors des calculs d'accélérations afin de savoir quelles sont les versions du programme qui sont les plus efficaces. 
+\\\\
+\indent D'une part, on observe que lorsqu'on varie le nombre d'itérations du calcul, le gain en temps d'exécution est sensiblement le même pour les trois méthodes jusqu'à cent mille d'itération. Passer cette valeur, on peut observer une accélération de la part des versions parallèles pouvant aller jusqu'à 4,5 fois plus rapide (version dynamique) pour un million d'itération. On utilisera donc les versions parallèles pour des itérations supérieures à mille fois l'opération de tirage. 
+\\\\
+\indent D'autre part, lorsqu'on varie le nombre de processus, les versions parallèles sont tout de suite beaucoup efficaces. En effet, la version statique possède déjà une accélération de 26 lors de l'exécution du programme sur vingt-six processeurs et la version dynamique, quant à elle, est quatre fois plus rapide que la version séquentielle. Cette accélération va décroitre par la suite et restera entre quatre et huit par la version statique, et entre 2 et 4 pour la version dynamique. Encore ici, on peut conclure, que les versions parallèles sont plus performantes lors de l'exécution du programme sur de multiple processus et ceci est d'autant plus vrai pour la version statique. 
+\\\\
+\indent Enfin, lorsqu'on varie le nombre de tâches attribués par processus, on observe que les versions parallèles sont encore une fois plus performantes. Plus précisément, la version dynamique commence à être plus performante à partir de cent tâches et voit ensuite son accélération réduite jusqu'à arriver à une valeur nulle à partir de cent mille tâche. Pour la version statique, cette dernière est nettement plus efficace avec une accélération de presque quatre pour dix tâche qui va décroître ensuite doucement pour arriver à un peu plus de trois pour cent million de tâches.
+\\\\
+\indent Pour conclure, les versions parallèles sont plus performantes dans les trois cas présentés ci-dessus, mais les deux versions restent pour autant assez proches. Toutefois, la version dynamique se trouve moins performante dans le cas d'une répartition de tâches trop nombreuses par processus. Au vu de l'implémentation du problème, qui actuellement a pour but de résoudre un problème de taille fixe (six numéro différents du jeu de Loto), il aurai été intéressant de voir également les effets d'une variation de la taille du problème à résoudre et voir en quoi cela aurait un impact sur les différentes versions en terme de vitesse d'exécution et d'accélération. 
 
-
-\section{Ouvertures}
 
 \newpage
 
