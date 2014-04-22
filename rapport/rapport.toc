@@ -15,4 +15,4 @@
 \contentsline {subsubsection}{\numberline {III.3.1}Variation du nombre d'it\IeC {\'e}rations}{5}{subsubsection.3.3.1}
 \contentsline {subsubsection}{\numberline {III.3.2}Variation du nombre de processus}{7}{subsubsection.3.3.2}
 \contentsline {subsubsection}{\numberline {III.3.3}Variation du nombre de t\IeC {\^a}ches}{9}{subsubsection.3.3.3}
-\contentsline {subsection}{\numberline {III.4}Analyse}{11}{subsection.3.4}
+\contentsline {subsection}{\numberline {III.4}Analyse}{12}{subsection.3.4}

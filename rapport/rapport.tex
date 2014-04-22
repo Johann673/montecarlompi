@@ -82,19 +82,20 @@ Clément \textsc{De Figueiredo}
 
 "\textit{Le terme méthode de Monte-Carlo, ou méthode Monte-Carlo, désigne toute méthode visant à calculer une valeur numérique en utilisant des procédés aléatoires, c'est-à-dire des techniques probabilistes.}" \cite{wiki:montecarlo}
 \\
-Dans le programme élaboré dans le cadre d'un travail de session pour le cours de programmation parallèle haute performance, la méthode de Monte-Carlo est appliquée aux jeux de hasard.
-Plus précisément, c'est le jeu du Loto qui a été choisi afin d'y appliquer la méthode de Monte-Carlo. En effet, l'objectif est de savoir quelles sont les probabilités qu'un nombre apparaisse plus qu'un autre. Dans ce but, plusieurs techniques de parallélisme ont été mise en place et leurs performances ont été mesurées afin de connaître quelle était la meilleure approche dans le contexte de la méthode de Monte-Carlo appliquée au jeu du Loto. 
+\indent Dans le programme élaboré dans le cadre d'un travail de session pour le cours de programmation parallèle haute performance, la méthode de Monte-Carlo est appliquée aux jeux de hasard.
+Plus précisément, c'est le jeu du Loto qui a été choisi afin d'y appliquer la méthode de Monte-Carlo. En effet, l'objectif est de savoir quelles sont les probabilités qu'un nombre apparaisse plus qu'un autre. Dans ce but, plusieurs techniques de parallélisme ont été mises en place et leurs performances ont été mesurées afin de connaître quelle était la meilleure approche dans le contexte de la méthode de Monte-Carlo appliquée au jeu du Loto. 
 
 
 \section{Approches utilisées}
 
 \subsection{Implémentation de Monte-Carlo}
-Le langage choisit afin d'utiliser la librairie \textbf{MPI} et le langage \textbf{C}. Ce langage a été choisi car la librairie \textbf{MPI} est compatible avec ce langage et nous disposions de connaissances suffisante en \textbf{C} afin d'implémenter cette solution de Monte-Carlo. 
-\\\\Dans un premier temps, MPI est initialisé avec \textbf{MPI\_Init} puis les processus esclaves sont identifiés avec l'instruction \textbf{MPI\_Comm\_rank}. Ensuite, si le processus actuel est le processus maître alors divers opérations sont effectuées : séquentielle, parallèle statique et parallèle dynamique (sac de tâches). Chaque temps d'exécution des divers calculs sont stockés grâce à la variable \textbf{MPI\_Wtime} et sont affichés à la fin d'exécution du programme.
+Le langage choisit afin d'utiliser la librairie \textbf{MPI} est le langage \textbf{C}. Ce langage a été choisi, car la librairie \textbf{MPI} y est compatible et nous disposons de connaissances suffisantes en \textbf{C} afin d'implémenter cette solution de Monte-Carlo. 
+\\\\
+\indent Dans un premier temps, \textbf{MPI} est initialisé avec \textbf{MPI\_Init} puis les processus esclaves sont identifiés avec l'instruction \textbf{MPI\_Comm\_rank}. Ensuite, si le processus actuel est le processus maître alors diverses opérations sont effectuées : séquentielle, parallèle statique et parallèle dynamique (sac de tâches). Chaque temps d'exécution des divers calculs sont stockés grâce à la variable \textbf{MPI\_Wtime} et sont affichés à la fin d'exécution du programme.
 
 \subsection{Génération de nombres aléatoires}
-La génération du nombre aléatoire utilisé dans la cadre de la fonction de tirage au sort a été faite de façon « Thread Safe ». C'est-à-dire que cela prévient les problèmes d'exclusion mutuelle qui pourrait avoir lieu si 2 threads voudraient récupérer une valeur, car la méthode de génération aléatoire se base sur l'horloge pour proposer un nombre.\\\\
-L'utilisation de nombres aléatoires en C se fait avec les fonctions \textit{srand()} et \textit{rand()}. La première prend un argument qui servira de graine pour la génération de nombre. L'idée est alors de fournir une valeur de temps couplé avec le numéro du thread pour que la valeur soit différente pour chaque processus. \\
+La méthode de génération du nombre aléatoire utilisée pour le tirage au sort a été faite de façon « Thread Safe ». C'est-à-dire que cela évite les problèmes d'exclusion mutuelle qui pourrait avoir lieu si deux threads voudraient récupérer une valeur, car la méthode de génération aléatoire se base sur l'horloge pour proposer un nombre.\\\\
+\indent L'utilisation de nombres aléatoires en C se fait avec les fonctions \textit{srand()} et \textit{rand()}. La première prend un argument qui servira de graine pour la génération de nombre. L'idée est alors de fournir une valeur de temps couplée avec le numéro du thread pour que la valeur soit différente pour chaque processus. \\
 Le code suivant nous donne alors une valeur aléatoire « Thread Safe » : \\
 \textit{srand(time(NULL) {\large \textasciicircum}  numProc);}
 
@@ -102,10 +103,10 @@ Le code suivant nous donne alors une valeur aléatoire « Thread Safe » : \\
 \subsection{Versions parallèles}
 
 \subsubsection{Statique}
-La version parallèle statique correspond à une version parallèle à granularité fine avec association statique entre tâches et threads. Autant de tâches vont être créées qu'il y a de processeurs. Chaque processus fait effectuer le tirage et les résultats vont être stockés localement. Ensuite, l'instruction \textbf{MPI\_Reduce} va avoir pour rôle d'effectuer une réduction et d'additionner (grâce à l'argument \textbf{MPI\_SUM}) tous ces résultats entre eux, le résultat final étant stocké dans un tableau final. Pour finir, on affiche les données issues du tableau récapitulatif ainsi que le temps d'exécution total. 
+La version parallèle statique correspond à une version parallèle à granularité fine avec association statique entre tâches et threads. Autant de tâches vont être créées qu'il y a de processus. Chaque processus fait effectuer le tirage et les résultats vont être stockés localement. Ensuite, l'instruction \textbf{MPI\_Reduce} va avoir pour rôle d'effectuer une réduction et d'additionner (grâce à l'argument \textbf{MPI\_SUM}) tous ces résultats entre eux, le résultat final étant stocké dans un tableau final. Pour finir, on affiche les données tirées du tableau récapitulatif ainsi que le temps d'exécution total. 
 
 \subsubsection{Dynamique}
-La version parallèle dynamique correspond à une version parallèle avec association dynamique entre tâches et threads de type « sac de tâches ». Cette version réalise la même opération que la version statique cependant quelques différences sont présentes. Un processus maître appelé « Coordinateur » a pour rôle de distribuer les tâches aux différents processus appelés « travailleurs ». Les « travailleurs » reçoivent les différentes tâches à effectuer avec l'instruction 
+La version parallèle dynamique correspond à une version parallèle avec association dynamique entre tâches et threads de type « sac de tâches ». Cette version réalise la même opération que la version statique cependant quelques différences sont présentes. Un processus maître appelé « \textit{coordinateur} » a pour rôle de distribuer les tâches aux différents processus appelés « \textit{travailleurs} ». Les « \textit{travailleurs} » demandent une nouvelle tâche, la traite, puis recommence jusqu'à ce que que le « \textit{coordinateur} » indique qu'il n'y a plus de tâches. Les résultats sont alors retournés vers le processus maître qui va additionner les tableaux reçues pour avoir le résultat final.
 
 \section{Résultats expérimentaux}
 
@@ -117,18 +118,18 @@ Les commandes disponibles dans le makefile sont les suivantes :
 	\item{\textbf{make tests}} afin de vérifier le bon fonctionnement du programme
 	\item{\textbf{make mesures}} pour exécuter le programme et en mesurer les performances
 \end{itemize}~~\\
-Des variables d'exécution pour également être modifiées. La variable \textbf{I} correspond au nombre total d'itérations effectués par la fonction \textbf{tirage} ainsi que la variable \textbf{NP} qui indique le nombre de processeurs utilisé par le programme.
+Des variables d'exécution peuvent également être modifiées. La variable \textbf{I} correspond au nombre total d'itérations effectuées par la fonction \textbf{tirage} ainsi que la variable \textbf{NP} qui indique le nombre de processeurs utilisés par le programme. Enfin, \textbf{NBPARTACHE} correspond au nombre de tâches traitées par un processus dans la version parallèle dynamique.
 
 
 \subsection{Conditions des tests}
-Pour réaliser différents tests, plusieurs valeurs différentes vont être testées dans un environnement identique afin que les mesures soient comparables. L'application étant dépendante de la génération de nombre aléatoire, c'est pourquoi chaque mesure a été effectuée cinq fois et la moyenne de ces cinq tests a été retenue comme valeur finale. 
+Pour réaliser les différents tests suivant, plusieurs valeurs différentes vont être testées dans un environnement identique afin que les mesures soient comparables. L'application est dépendante de la génération de nombre aléatoire, c'est pourquoi chaque mesure a été effectuée cinq fois et la moyenne de ces cinq tests a été retenue comme valeur finale. 
 
 \subsection{Résultats}
-Afin d'étudier les effets d'une implémentation parallèle, nous avions varié trois paramètres : le nombre d'itérations du tirage au sort, le nombre de threads et le nombre de tâches. \\
+Afin d'étudier les effets d'une implémentation parallèle, nous avons varié trois paramètres : le nombre d'itérations du tirage au sort, le nombre de threads et le nombre de processus par tâches. \\
 Dans les résultats présentés par la suite, \textit{S} correspond à « séquentiel », \textit{PS} à « parallèle statique » et enfin \textit{PD} à « parallèle dynamique ». 
 
 \subsubsection{Variation du nombre d'itérations}
-La méthode de Monte-Carlo consiste à réaliser un grand nombre de fois une opération pour que la probabilité qu’un certain nombre soit choisi soit élevée, dans le cas de notre application de la méthode au jeu de Loto. Nous allons donc faire varier la valeur correspondante aux itérations du calcul sur une échelle allant de dix à cents millions (Tab. \ref{tab:tempsexec1} et Fig. \ref{fig:tempsexec1}).\\
+La méthode de Monte-Carlo consiste à réaliser un grand nombre de fois une opération pour calculer la probabilité qu'un nombre est susceptible d'apparaître, dans le cas de notre application de la méthode au jeu de Loto. Nous allons donc faire varier la valeur correspondante aux itérations du calcul sur une échelle allant de dix à cent millions (Tab. \ref{tab:tempsexec1} et Fig. \ref{fig:tempsexec1}).\\
 
 \begin{table}[H]
 \caption{Résultat de la variation de la répétition}
@@ -148,7 +149,7 @@ La méthode de Monte-Carlo consiste à réaliser un grand nombre de fois une op�
 \label{fig:tempsexec1}
 \end{figure}
 
-On observe que le temps d'exécution est sensiblement le même entre les trois versions jusqu'à un million de répétitions (entre 0 et 10 millisecondes). Une fois ce seuil franchi, le temps d'exécution augmente plus rapidement en séquentiel qu'en parallèle. Pour ce qui est de l'accélération, les versions statique et dynamique sont presque pareilles à un détail près. L'accélération de la version dynamique va continuer à croitre jusqu'à un million d'itérations là où l'accélération de la version statique va commencer à décroitre vers cents mille itérations (Tab. \ref{tab:acc1} et Fig. \ref{fig:acc1}).
+On observe que le temps d'exécution est sensiblement le même entre les trois versions jusqu'à un million de répétitions (entre 0 et 10 millisecondes). Une fois ce seuil franchi, le temps d'exécution augmente plus rapidement en séquentiel qu'en parallèle. Pour ce qui est de l'accélération, la version statique et dynamique sont presque pareille à un détail près, l'accélération de la version dynamique va continuer à croitre jusqu'à un million d'itérations là où l'accélération de la version statique va commencer à décroitre vers cent milles itérations (Tab. \ref{tab:acc1} et Fig. \ref{fig:acc1}).
 
 \begin{table}[H]
 \caption{Résultat de l'accélération avec la variation de la répétition}
@@ -168,7 +169,7 @@ On observe que le temps d'exécution est sensiblement le même entre les trois v
 \end{figure}
 
 \subsubsection{Variation du nombre de processus}
-Ce deuxième test consiste à faire varier le nombre de processus sur lequel/lesquels l'application va s'exécuter. Des valeurs vont être choisi allants de un à deux–cents avec des paliers de vingt-cinq. On peut voir que la méthode statique est légèrement plus rapide que la méthode dynamique. Au notera aussi qu'il n'y a aucun résultat pour la méthode dynamique lors de l'exécution du programme sur un processus. En effet, la mise en place d'une stratégie coordonnateur/travailleurs implique obligatoirement au moins 2 processus, ce qui explique le manque de résultat pour 1 processus (Tab. \ref{tab:tempsexec2} et Fig. \ref{fig:tempsexec2}).
+Ce deuxième test consiste à faire varier le nombre de processus sur lesquels l'application va s'exécuter. Des valeurs vont être choisies allants de un à deux cents avec des paliers de vingt-cinq. On peut voir que la méthode statique est légèrement plus rapide que la méthode dynamique. On notera aussi qu'il n'y a aucun résultat pour la méthode dynamique lors de l'exécution du programme sur un processus. En effet, la mise en place d'une stratégie coordonnateur/travailleurs implique obligatoirement au moins deux processus, ce qui explique le manque de résultat pour un seul processus (Tab. \ref{tab:tempsexec2} et Fig. \ref{fig:tempsexec2}).
 
 \begin{table}[H]
 \caption{Résultat de la variation du nombre de processus}
@@ -188,7 +189,7 @@ Ce deuxième test consiste à faire varier le nombre de processus sur lequel/les
 \label{fig:tempsexec2}
 \end{figure}
 
-La mesure d'accélération montre bien que la version statique est plus efficace que la version dynamique, surtout à partir de vingt-six processus. Cependant, les valeurs d'accélération ont tendances à se rapprocher vers cent vingt-six processus (Tab. \ref{tab:acc2} et Fig. \ref{fig:acc2}).
+La mesure de l'accélération montre bien que la version statique est plus efficace que la version dynamique, surtout à partir de vingt-six processus. Cependant, les valeurs d'accélération ont tendances à se rapprocher vers cent vingt-six processus (Tab. \ref{tab:acc2} et Fig. \ref{fig:acc2}).
 
 \begin{table}[H]
 \caption{Résultat de l'accélération avec la variation du nombre de processus}
@@ -207,12 +208,11 @@ La mesure d'accélération montre bien que la version statique est plus efficace
 \label{fig:acc2}
 \end{figure}
 
-
+\vspace{0.5cm}
 \subsubsection{Variation du nombre de tâches}
-%qd ntache => repetition : c'est une version séquentiel car 1 seul proc travail
-Dans la version parallèle dynamique de notre implémentation de la méthode de Monte-Carlo, on divise le nombre de tâches en plusieurs groupes pour que chaque thread réalise une tâche après l'autre jusqu'à la fin de la queue. Chaque thread récupère une tâche lorsque sa tâche précédente est terminée, dans le cas contraire il attend une opération de communication afin de transmettre ces résultats au thread maître. \\
-Nous allons donc tester différentes valeurs allant de dix tâches à cent millions de tâches afin d'observer les effets de la variation d'un petit ou grand nombre de tâche sur les différentes versions du programme.\\
-Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et statique car le nombre de tâche est fixe au contraire de la version dynamique. On peut donc voir que la version dynamique est plus performante que la version séquentielle entre 100 et 100 000 tâches, mais une fois que le découpage de tâche est égale ou supérieur au nombre d'itérations, un seul thread travail car il n'y a qu'une grosse tâche, ce qui rend cette version identique à une version séquentielle (Tab. \ref{tab:tempsexec3} et Fig. \ref{fig:tempsexec3}). 
+Dans la version parallèle dynamique de notre implémentation de la méthode de Monte-Carlo, on divise le nombre de tâches en plusieurs groupes pour que chaque thread réalise une tâche après l'autre jusqu'à la fin de la queue. Chaque thread récupère une tâche lorsque sa tâche précédente est terminée, dans le cas contraire il attend une opération de communication afin de transmettre ces résultats au thread maître. \\\\
+\indent Nous allons donc tester différentes valeurs allant de dix à cent millions de tâches afin d'observer les effets de la variation d'un petit ou grand nombre de tâche sur les différentes versions du programme.\\\\
+\indent Comme prévu, les résultats ne varient pas avec la méthode séquentielle et statique, car le nombre de tâche est fixe au contraire de la version dynamique. On peut donc voir que la version dynamique est plus performante que la version séquentielle entre 100 et 100 000 tâches, mais une fois que le découpage de tâche est égal ou supérieur au nombre d'itérations, un seul thread travail, car il n'y a qu'une grosse tâche, ce qui rend cette version identique à une version séquentielle (Tab. \ref{tab:tempsexec3} et Fig. \ref{fig:tempsexec3}). 
 
 \begin{table}[H]
 \caption{Résultat de la variation du nombre de tâches}
@@ -233,7 +233,7 @@ Comme prévu, les résultats ne varient pas avec les méthodes séquentielle et 
 \label{fig:tempsexec3}
 \end{figure}
 
-Afin de mieux observer les résultats, voici le calcul de l'accélération des deux méthodes parallèles. On aperçoit bien que la version dynamique est performante quand le découpage des tâches est inférieur au nombre de répétitions, bien que si les tâches sont trop petites l'accélération est en dessous de 1 ce qui signifie qu'elle n'est pas optimisée (Tab. \ref{tab:acc3} et Fig. \ref{fig:acc3}). 
+Afin de mieux observer les résultats, voici le calcul de l'accélération des deux méthodes parallèles. On aperçoit bien que la version dynamique est performante quand le découpage de tâches est inférieur au nombre de répétitions, bien que si les tâches sont trop petites l'accélération est en dessous de un, ce qui signifie qu'elle n'est pas optimisée (Tab. \ref{tab:acc3} et Fig. \ref{fig:acc3}). 
 
 
 \begin{table}[H]
@@ -254,16 +254,17 @@ Afin de mieux observer les résultats, voici le calcul de l'accélération des d
 \label{fig:acc3}
 \end{figure}
 
+\newpage
 \subsection{Analyse}
-Pour l'analyse des résultats, nous nous sommes basés sur les valeurs de obtenus lors des calculs d'accélérations afin de savoir quelles sont les versions du programme qui sont les plus efficaces. 
+Pour l'analyse des résultats, nous nous sommes basés sur les valeurs obtenues lors des calculs d'accélérations afin de savoir quelle est la version du programme qui est la plus efficace. 
 \\\\
-\indent D'une part, on observe que lorsqu'on varie le nombre d'itérations du calcul, le gain en temps d'exécution est sensiblement le même pour les trois méthodes jusqu'à cent mille d'itération. Passer cette valeur, on peut observer une accélération de la part des versions parallèles pouvant aller jusqu'à 4,5 fois plus rapide (version dynamique) pour un million d'itération. On utilisera donc les versions parallèles pour des itérations supérieures à mille fois l'opération de tirage. 
+\indent D'une part, on observe que lorsqu'on varie le nombre d'itérations du calcul, le gain en temps d'exécution est sensiblement le même pour les trois méthodes jusqu'à cent mille itérations. Passé cette valeur, on peut observer une accélération de la part des versions parallèles pouvant aller jusqu'à 4,5 fois plus rapide (version dynamique) pour un million d'itération. On utilisera donc les versions parallèles pour des itérations supérieures à mille fois l'opération de tirage. 
 \\\\
-\indent D'autre part, lorsqu'on varie le nombre de processus, les versions parallèles sont tout de suite beaucoup efficaces. En effet, la version statique possède déjà une accélération de 26 lors de l'exécution du programme sur vingt-six processeurs et la version dynamique, quant à elle, est quatre fois plus rapide que la version séquentielle. Cette accélération va décroitre par la suite et restera entre quatre et huit par la version statique, et entre 2 et 4 pour la version dynamique. Encore ici, on peut conclure, que les versions parallèles sont plus performantes lors de l'exécution du programme sur de multiple processus et ceci est d'autant plus vrai pour la version statique. 
+\indent D'autre part, lorsqu'on varie le nombre de processus, les versions parallèles sont tout de suite beaucoup plus efficaces. En effet, la version statique possède déjà une accélération de 26 lors de l'exécution du programme sur vingt-six processeurs et la version dynamique, quant à elle, est quatre fois plus rapide que la version séquentielle. Cette accélération va décroitre par la suite et restera entre quatre et huit par la version statique et entre deux et quatre pour la version dynamique. Encore ici, on peut conclure, que les versions parallèles sont plus performantes lors de l'exécution du programme sur de multiple processus et ceci est d'autant plus vrai pour la version statique. 
 \\\\
-\indent Enfin, lorsqu'on varie le nombre de tâches attribués par processus, on observe que les versions parallèles sont encore une fois plus performantes. Plus précisément, la version dynamique commence à être plus performante à partir de cent tâches et voit ensuite son accélération réduite jusqu'à arriver à une valeur nulle à partir de cent mille tâche. Pour la version statique, cette dernière est nettement plus efficace avec une accélération de presque quatre pour dix tâche qui va décroître ensuite doucement pour arriver à un peu plus de trois pour cent million de tâches.
+\indent Enfin, lorsqu'on varie le nombre de tâches attribuées par processus, on observe que les versions parallèles sont encore une fois plus performantes. Plus précisément, la version dynamique commence à être plus performante à partir de cent tâches et voit ensuite son accélération réduite jusqu'à arriver à une valeur de un à partir de cent mille tâches. Pour la version statique, cette dernière est nettement plus efficace avec une accélération de presque quatre pour dix tâches qui va décroître ensuite doucement pour arriver à un peu plus de trois pour cent millions de tâches.
 \\\\
-\indent Pour conclure, les versions parallèles sont plus performantes dans les trois cas présentés ci-dessus, mais les deux versions restent pour autant assez proches. Toutefois, la version dynamique se trouve moins performante dans le cas d'une répartition de tâches trop nombreuses par processus. Au vu de l'implémentation du problème, qui actuellement a pour but de résoudre un problème de taille fixe (six numéro différents du jeu de Loto), il aurai été intéressant de voir également les effets d'une variation de la taille du problème à résoudre et voir en quoi cela aurait un impact sur les différentes versions en terme de vitesse d'exécution et d'accélération. 
+\indent Pour conclure, les versions parallèles sont plus performante dans les trois cas présentés ci-dessus, mais les deux versions restent pour autant assez proches. Toutefois, la version dynamique se trouve moins performante dans le cas d'une répartition de tâches trop nombreuses par processus. L'implémentation du problème ayant pour but de résoudre un problème de taille fixe (six numéro différents du jeu de Loto), il aurait été intéressant de voir les effets d'une variation de la taille du problème à résoudre et voir en quoi cela aurait eu un impact sur les différentes versions en terme de vitesse d'exécution et d'accélération. 
 
 
 \newpage
